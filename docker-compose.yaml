@@ -4,6 +4,8 @@ services:
   db:
     image: postgres:14
     env_file: ./ionos/.env
+    ports:
+      - "127.0.0.1:5432:5432"
     volumes:
       - ./provision/db-initialize.sql:/docker-entrypoint-initdb.d/1.sql
       - ./provision/postgres-data:/var/lib/postgresql/data

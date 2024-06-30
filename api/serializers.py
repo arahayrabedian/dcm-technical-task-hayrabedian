@@ -46,7 +46,7 @@ class TestRunRequestItemSerializer(serializers.ModelSerializer):
 class TestFilePathSerializer(serializers.ModelSerializer):
     class Meta:
         model = TestFilePath
-        fields = ('id', 'path')
+        fields = ('id', 'path', 'directory')
 
 
 class TestEnvironmentSerializer(serializers.ModelSerializer):

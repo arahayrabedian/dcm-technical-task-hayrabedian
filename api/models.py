@@ -1,5 +1,8 @@
+import os
+
 from django.conf import settings
 from django.db import models
+from django.db import transaction
 
 from api.utils import ExtendedEnum
 
@@ -14,6 +17,8 @@ class Timestampable(models.Model):
 
 class TestFilePath(Timestampable):
     path = models.CharField(max_length=1024)
+    directory = models.CharField(max_length=1024, default='')
+    is_user_upload = models.BooleanField(default=False)
 
     def __str__(self):
         return self.path
