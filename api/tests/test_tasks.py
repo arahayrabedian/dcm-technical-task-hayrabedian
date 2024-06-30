@@ -8,6 +8,7 @@ from api.tasks import handle_task_retry, MAX_RETRY, execute_test_run_request
 
 
 class TestTasks(TestCase):
+    # TODO: figure out a race condition test.
 
     def setUp(self) -> None:
         self.env = TestEnvironment.objects.create(name='my_env')

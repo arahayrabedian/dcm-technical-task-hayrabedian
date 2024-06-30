@@ -6,10 +6,16 @@ from api.models import TestFilePath, TestEnvironment, TestRunRequest
 class TestTTestFilePath(TestCase):
 
     def setUp(self) -> None:
-        self.path = TestFilePath.objects.create(path='test')
+        self.path = TestFilePath.objects.create(
+            path='test',
+            directory='directory'
+        )
 
     def test__str__(self):
         self.assertEqual('test', str(self.path))
+
+    def test_directory_saved(self):
+        self.assertEqual('directory', self.path.directory)
 
 
 class TestTestEnvironment(TestCase):

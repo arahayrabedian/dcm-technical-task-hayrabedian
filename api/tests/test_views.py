@@ -152,3 +152,23 @@ class TestAssetsAPIView(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertEqual({'k': 'v'}, response.json())
+
+
+class TestFileUploadView(TestCase):
+
+    def setUp(self) -> None:
+        self.url = reverse('add_test_file')
+
+    def test_upload(self):
+        upload_data = {
+            "upload_dir": "something",
+            "test_file": open('sample-tests/test_success.py')
+        }
+        response = self.client.post(self.url, data=upload_data)
+        self.assertEqual(status.HTTP_201_CREATED, response.status_code)
+
+        uploaded = TestFilePath.objects.get(directory='something')
+
+        # in theory, django's media uploads may suffix to avoid clashes,
+        # so file name may not match exactly, we can do a second-best check.
+        self.assertTrue('something/test_success' in uploaded.path)
